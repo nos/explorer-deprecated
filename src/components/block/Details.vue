@@ -42,6 +42,22 @@
 
       <div class="list-row-border-b">
         <div class="mr-4">
+          Top Delegate Rewards
+        </div>
+        <div
+          v-if="block.forged"
+          v-tooltip="{
+            trigger: 'hover click',
+            content: price ? readableCurrency(block.forged.topReward, price) : '',
+            placement: 'left'
+          }"
+        >
+          {{ readableCrypto(block.forged.topReward) }}
+        </div>
+      </div>
+
+      <div class="list-row-border-b">
+        <div class="mr-4">
           {{ $t('BLOCK.FEES') }}
         </div>
         <div
@@ -53,6 +69,22 @@
           }"
         >
           {{ readableCrypto(block.forged.fee) }}
+        </div>
+      </div>
+
+      <div class="list-row-border-b">
+        <div class="mr-4">
+          Removed Fees
+        </div>
+        <div
+          v-if="block.forged"
+          v-tooltip="{
+            trigger: 'hover click',
+            content: price ? readableCurrency(block.forged.removed, price) : '',
+            placement: 'left'
+          }"
+        >
+          {{ readableCrypto(block.forged.removed) }}
         </div>
       </div>
 
@@ -157,7 +189,9 @@ export default {
         return
       }
 
-      this.price = await CryptoCompareService.dailyAverage(this.block.timestamp.unix)
+      this.price = await CryptoCompareService.dailyAverage(
+        this.block.timestamp.unix
+      )
     }
   }
 }
