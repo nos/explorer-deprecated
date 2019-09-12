@@ -203,3 +203,7 @@ th.not-sortable:hover {
 .row-mobile {
   @apply .px-5 .py-4;
 }
+
+.list-sublist > li {
+  margin-bottom: 10px;
+}

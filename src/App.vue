@@ -98,6 +98,7 @@ export default {
     this.updateLocale()
     this.updateCurrencyRate()
     this.updateSupply()
+    this.updateStaked()
     this.updateHeight()
     this.updateDelegates()
   },
@@ -125,6 +126,11 @@ export default {
     async updateSupply () {
       const supply = await BlockchainService.supply()
       this.$store.dispatch('network/setSupply', supply)
+    },
+
+    async updateStaked () {
+      const staked = await BlockchainService.staked()
+      this.$store.dispatch('network/setStaked', staked)
     },
 
     async updateHeight () {
@@ -163,6 +169,7 @@ export default {
 
       this.networkTimer = setInterval(() => {
         this.updateSupply()
+        this.updateStaked()
         this.updateHeight()
         this.updateDelegates()
       }, 8 * 1000)

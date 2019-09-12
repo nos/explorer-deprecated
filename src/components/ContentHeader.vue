@@ -11,9 +11,14 @@
         <div class="pr-6">
           {{ $t('HEADER.NETWORK') }}: {{ $t(`HEADER.${alias.toUpperCase()}`) }}
         </div>
+        <div class="pr-6">
+          Staked: <span class="whitespace-no-wrap">{{ readableCrypto(staked, true, 0) }}</span>
+        </div>
+
         <div :class="{ 'pr-6': isMain }">
           {{ $t('HEADER.SUPPLY') }}: <span class="whitespace-no-wrap">{{ readableCrypto(supply, true, 0) }}</span>
         </div>
+
         <div v-if="isMain">
           {{ $t('HEADER.MARKET_CAP') }}: <span class="whitespace-no-wrap">{{ readableCurrency(supply) }}</span>
         </div>
@@ -43,7 +48,7 @@ export default {
   name: 'ContentHeader',
 
   computed: {
-    ...mapGetters('network', ['alias', 'supply', 'height']),
+    ...mapGetters('network', ['alias', 'supply', 'staked', 'height']),
     ...mapGetters('currency', ['name', 'rate', 'symbol']),
 
     isMain () {

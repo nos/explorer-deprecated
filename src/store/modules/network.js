@@ -14,6 +14,7 @@ export default {
     currencies: [],
     knownWallets: [],
     supply: 0,
+    staked: 0,
     height: 0
   },
   mutations: {
@@ -49,6 +50,9 @@ export default {
     },
     [types.SET_NETWORK_SUPPLY] (state, payload) {
       state.supply = payload.value
+    },
+    [types.SET_NETWORK_STAKED] (state, payload) {
+      state.staked = payload.value
     },
     [types.SET_NETWORK_HEIGHT] (state, payload) {
       state.height = payload.value
@@ -121,6 +125,12 @@ export default {
         value
       })
     },
+    setStaked: ({ commit }, value) => {
+      commit({
+        type: types.SET_NETWORK_STAKED,
+        value
+      })
+    },
     setHeight: ({ commit }, value) => {
       commit({
         type: types.SET_NETWORK_HEIGHT,
@@ -140,6 +150,7 @@ export default {
     currencies: state => state.currencies,
     knownWallets: state => state.knownWallets,
     supply: state => state.supply,
+    staked: state => state.staked,
     height: state => state.height
   }
 }

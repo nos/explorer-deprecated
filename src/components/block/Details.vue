@@ -58,22 +58,6 @@
 
       <div class="list-row-border-b">
         <div class="mr-4">
-          {{ $t('BLOCK.FEES') }}
-        </div>
-        <div
-          v-if="block.forged"
-          v-tooltip="{
-            trigger: 'hover click',
-            content: price ? readableCurrency(block.forged.fee, price) : '',
-            placement: 'left'
-          }"
-        >
-          {{ readableCrypto(block.forged.fee) }}
-        </div>
-      </div>
-
-      <div class="list-row-border-b">
-        <div class="mr-4">
           Removed Fees
         </div>
         <div
@@ -90,7 +74,39 @@
 
       <div class="list-row-border-b">
         <div class="mr-4">
-          {{ $t('BLOCK.TOTAL_FORGED') }}
+          Supply Change
+        </div>
+        <div
+          v-if="block.forged"
+          v-tooltip="{
+            trigger: 'hover click',
+            content: price ? readableCurrency(block.forged.removed, price) : '',
+            placement: 'left'
+          }"
+        >
+          {{ readableCrypto(+block.forged.reward + +block.forged.topReward - +block.forged.removed) }}
+        </div>
+      </div>
+
+      <div class="list-row-border-b">
+        <div class="mr-4">
+          Collected Fees
+        </div>
+        <div
+          v-if="block.forged"
+          v-tooltip="{
+            trigger: 'hover click',
+            content: price ? readableCurrency(block.forged.fee, price) : '',
+            placement: 'left'
+          }"
+        >
+          {{ readableCrypto(block.forged.fee) }}
+        </div>
+      </div>
+
+      <div class="list-row-border-b">
+        <div class="mr-4">
+          Total Collected
         </div>
         <div
           v-if="block.forged"
@@ -132,7 +148,7 @@
         </div>
       </div>
 
-      <div class="list-row">
+      <div class="list-row-border-b-no-wrap">
         <div class="mr-4">
           {{ $t('BLOCK.GENERATED_BY') }}
         </div>
@@ -142,6 +158,23 @@
             tooltip-placement="left"
           />
         </div>
+      </div>
+
+      <div class="list-row">
+        <div class="mr-4">
+          Top Delegates
+        </div>
+        <ul class="list-sublist">
+          <li
+            v-for="(delegate, index) in block.topDelegates"
+            :key="index"
+          >
+            <LinkWallet
+              :address="delegate.address"
+              tooltip-placement="left"
+            />
+          </li>
+        </ul>
       </div>
     </div>
   </section>

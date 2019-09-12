@@ -10,6 +10,11 @@ class BlockchainService {
     const response = await ApiService.get('blockchain')
     return response.data.supply
   }
+
+  async staked () {
+    const response = await ApiService.get('blockchain')
+    return response.data.staked
+  }
 }
 
 export default new BlockchainService()
