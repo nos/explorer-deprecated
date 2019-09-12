@@ -4,7 +4,7 @@
       v-if="data === null"
       class="text-center"
     >
-      <PulseLoader color="#037cff" />
+      <PulseLoader color="#6979F8" />
     </div>
 
     <slot v-else />

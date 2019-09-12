@@ -1,14 +1,6 @@
 <template>
   <div class="max-w-2xl mx-auto md:pt-5">
     <ContentHeader>{{ $t('PAGES.HOME.HEADER') }}</ContentHeader>
-
-    <section
-      v-if="priceChart"
-      class="hidden md:block mb-5 bg-theme-feature-background xl:rounded-lg"
-    >
-      <ChartWrapper />
-    </section>
-
     <section class="page-section py-5 md:py-10">
       <div class="flex flex-col sm:flex-row items-center mx-5 sm:mx-0 mb-4 sm:mb-8">
         <nav
@@ -46,14 +38,12 @@
 </template>
 
 <script type="text/ecmascript-6">
-import ChartWrapper from '@/components/ChartWrapper'
 import { LatestBlocks, LatestTransactions } from '@/components/home'
 import SelectionType from '@/components/SelectionType'
 import { mapGetters } from 'vuex'
 
 export default {
   components: {
-    ChartWrapper,
     LatestBlocks,
     LatestTransactions,
     SelectionType

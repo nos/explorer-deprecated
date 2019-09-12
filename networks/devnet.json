@@ -1,15 +1,15 @@
 {
-  "title": "DARK Explorer",
+  "title": "nOS Testnet Explorer",
   "server": "http://167.71.72.197:4003/api",
   "alias": "Development",
   "activeDelegates": 47,
   "rewardOffset": 14000,
-  "currencies": [],
+  "currencies": false,
   "knownWallets": {
     "dNFSywnF45FsjYQ4XE8hpG2xNYt9wk13X7" : "nOS Company Vested Tokens"
   },
   "defaults": {
-    "token": "DOS",
+    "token": "NOS",
     "symbol": "O",
     "currency": null,
     "priceChart": false

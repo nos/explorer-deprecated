@@ -139,7 +139,7 @@ module.exports = {
       'blue-darkest': '#202126', // UPDATED
       'blue-darker': '#282a38', // UPDATED
       'blue-dark': '#2779bd',
-      blue: '#037CFF', // UPDATED
+      blue: '#6979F8', // UPDATED
       'blue-light': '#6f77a4', // UPDATED
       'blue-lighter': '#e8eeff', // UPDATED
       'blue-lightest': '#e0f0fd', // UPDATED
