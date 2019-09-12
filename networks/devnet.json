@@ -1,11 +1,13 @@
 {
   "title": "DARK Explorer",
-  "server": "http://167.71.78.51:4003/api",
+  "server": "http://167.71.72.197:4003/api",
   "alias": "Development",
   "activeDelegates": 47,
   "rewardOffset": 14000,
   "currencies": [],
-  "knownWallets": {},
+  "knownWallets": {
+    "dNFSywnF45FsjYQ4XE8hpG2xNYt9wk13X7" : "nOS Company Vested Tokens"
+  },
   "defaults": {
     "token": "DOS",
     "symbol": "O",

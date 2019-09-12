@@ -41,7 +41,7 @@ button:disabled {
 }
 
 .menu-button:hover {
-  @apply .border-red;
+  @apply .border-blue;
 }
 
 /* Dropdown Buttons */
