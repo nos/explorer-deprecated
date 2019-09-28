@@ -70,6 +70,8 @@
     <span v-else-if="type === 6">{{ $t('TRANSACTION.TYPES.TIMELOCK_TRANSFER') }}</span>
     <span v-else-if="type === 7">{{ $t('TRANSACTION.TYPES.MULTI_PAYMENT') }}</span>
     <span v-else-if="type === 8">{{ $t('TRANSACTION.TYPES.DELEGATE_RESIGNATION') }}</span>
+    <span v-else-if="type === 100">Stake</span>
+    <span v-else-if="type === 101">Stake Redeem</span>
   </span>
 </template>
 

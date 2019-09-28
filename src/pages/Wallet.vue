@@ -17,6 +17,11 @@
       </div>
     </section>
 
+    <WalletStakes
+      v-if="wallet.stake"
+      :wallet="wallet"
+    />
+
     <WalletTransactions
       v-if="wallet"
       :wallet="wallet"
@@ -28,6 +33,7 @@
 import {
   WalletDelegate,
   WalletDetails,
+  WalletStakes,
   WalletTransactions
 } from '@/components/wallet'
 import WalletService from '@/services/wallet'
@@ -36,6 +42,7 @@ export default {
   components: {
     WalletDelegate,
     WalletDetails,
+    WalletStakes,
     WalletTransactions
   },
 
@@ -54,7 +61,9 @@ export default {
     try {
       const response = await WalletService.find(to.params.address)
       next(vm => vm.setWallet(response))
-    } catch (e) { next({ name: '404' }) }
+    } catch (e) {
+      next({ name: '404' })
+    }
   },
 
   async beforeRouteUpdate (to, from, next) {
@@ -64,7 +73,9 @@ export default {
       const response = await WalletService.find(to.params.address)
       this.setWallet(response)
       next()
-    } catch (e) { next({ name: '404' }) }
+    } catch (e) {
+      next({ name: '404' })
+    }
   },
 
   methods: {

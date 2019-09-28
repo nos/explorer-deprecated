@@ -1,5 +1,14 @@
 <template>
-  <div class="WalletTransactions">
+  <div
+    class="WalletTransactions"
+    style="margin-top:20px;"
+  >
+    <h1
+      style="margin-left:15px;"
+      class="mb-5 text-1xl md:text-3xl mb-5 md:mb-6 text-theme-text-primary sm:mr-5"
+    >
+      Transactions
+    </h1>
     <h2 class="text-2xl mb-5 md:mb-6 px-5 sm:hidden text-theme-text-primary">
       {{ $t('COMMON.TRANSACTIONS') }}
     </h2>

@@ -14,7 +14,10 @@
         </div>
       </div>
 
-      <div class="list-row-border-b">
+      <div
+        v-if="transaction.recipient !== transaction.sender"
+        class="list-row-border-b"
+      >
         <div class="mr-4">
           {{ $t('TRANSACTION.RECIPIENT') }}
         </div>
@@ -31,16 +34,45 @@
 
       <div class="list-row-border-b">
         <div class="mr-4">
-          {{ $t('COMMON.CONFIRMATIONS') }}
+          {{ $t('TRANSACTION.TYPE') }}
         </div>
-        <div>{{ confirmations }}</div>
+        <span v-if="transaction.type === 1">{{ $t('TRANSACTION.TYPES.SECOND_SIGNATURE') }}</span>
+        <span v-else-if="transaction.type === 2">{{ $t('TRANSACTION.TYPES.DELEGATE_REGISTRATION') }}</span>
+        <span v-else-if="transaction.type === 3">
+          <RouterLink
+            v-if="votedDelegateAddress"
+            v-tooltip="{
+              content: votedDelegateAddress,
+              placement: tooltipPlacement
+            }"
+            :to="{ name: 'wallet', params: { address: votedDelegateAddress } }"
+          >
+            <span :class="getVoteColor">
+              {{ isUnvote ? $t('TRANSACTION.TYPES.UNVOTE') : $t('TRANSACTION.TYPES.VOTE') }}
+              <span
+                class="italic"
+              >({{ votedDelegateUsername }})</span>
+            </span>
+          </RouterLink>
+        </span>
+        <span v-else-if="transaction.type === 4">{{ $t('TRANSACTION.TYPES.MULTI_SIGNATURE') }}</span>
+        <span v-else-if="transaction.type === 5">{{ $t('TRANSACTION.TYPES.IPFS') }}</span>
+        <span v-else-if="transaction.type === 6">{{ $t('TRANSACTION.TYPES.TIMELOCK_TRANSFER') }}</span>
+        <span v-else-if="transaction.type === 7">{{ $t('TRANSACTION.TYPES.MULTI_PAYMENT') }}</span>
+        <span v-else-if="transaction.type === 8">{{ $t('TRANSACTION.TYPES.DELEGATE_RESIGNATION') }}</span>
+        <span v-else-if="transaction.type === 100">Stake</span>
+        <span v-else-if="transaction.type === 101">Stake Redeem</span>
       </div>
 
-      <div class="list-row-border-b">
+      <div
+        v-if="transaction.amount > 0 || (transaction.asset !== undefined && transaction.asset.stakeCreate !== undefined)"
+        class="list-row-border-b"
+      >
         <div class="mr-4">
           {{ $t('TRANSACTION.AMOUNT') }}
         </div>
         <div
+          v-if="transaction.amount > 0"
           v-tooltip="{
             trigger: 'hover click',
             content: price ? readableCurrency(transaction.amount, price) : '',
@@ -48,6 +80,16 @@
           }"
         >
           {{ readableCrypto(transaction.amount) }}
+        </div>
+        <div
+          v-if="transaction.asset !== undefined && transaction.asset.stakeCreate !== undefined"
+          v-tooltip="{
+            trigger: 'hover click',
+            content: price ? readableCurrency(transaction.asset.stakeCreate.amount, price) : '',
+            placement: 'left'
+          }"
+        >
+          {{ readableCrypto(transaction.asset.stakeCreate.amount) }}
         </div>
       </div>
 
@@ -100,6 +142,13 @@
           </LinkBlock>
         </div>
       </div>
+
+      <div class="list-row-border-b">
+        <div class="mr-4">
+          {{ $t('COMMON.CONFIRMATIONS') }}
+        </div>
+        <div>{{ confirmations }}</div>
+      </div>
     </div>
   </section>
 </template>
@@ -127,7 +176,9 @@ export default {
     ...mapGetters('network', ['height']),
 
     confirmations () {
-      return this.initialBlockHeight ? this.height - this.initialBlockHeight : this.transaction.confirmations
+      return this.initialBlockHeight
+        ? this.height - this.initialBlockHeight
+        : this.transaction.confirmations
     }
   },
 
@@ -150,7 +201,9 @@ export default {
 
   methods: {
     async updatePrice () {
-      this.price = await CryptoCompareService.dailyAverage(this.transaction.timestamp.unix)
+      this.price = await CryptoCompareService.dailyAverage(
+        this.transaction.timestamp.unix
+      )
     },
 
     setInitialBlockHeight () {

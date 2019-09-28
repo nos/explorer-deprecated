@@ -36,9 +36,7 @@
           <span
             v-if="name"
             class="ml-2 text-white semibold"
-          >
-            {{ name }}
-          </span>
+          >{{ name }}</span>
           <svg
             v-if="name"
             v-tooltip="$t('WALLET.VERIFIED')"
@@ -92,9 +90,27 @@
           {{ $t('WALLET.BALANCE', { token: networkToken() }) }}
         </div>
         <div class="text-lg text-white semibold">
-          <span v-tooltip="readableCurrency(wallet.balance)">
-            {{ readableCrypto(wallet.balance, false) }}
-          </span>
+          <span
+            v-tooltip="readableCurrency(wallet.balance)"
+          >{{ readableCrypto(wallet.balance, false) }}</span>
+        </div>
+      </div>
+
+      <div class="flex-none border-r border-grey-dark px-9">
+        <div class="text-grey mb-2">
+          Staked
+        </div>
+        <div class="text-lg text-white semibold">
+          <span>{{ readableCrypto(totalStake) }}</span>
+        </div>
+      </div>
+
+      <div class="flex-none border-r border-grey-dark px-9">
+        <div class="text-grey mb-2">
+          Vote Weight
+        </div>
+        <div class="text-lg text-white semibold">
+          <span>{{ readableCrypto(+wallet.stakeWeight + ( Math.floor(+wallet.balance * 0.1 / 100000000) * 100000000), false) }}</span>
         </div>
       </div>
 
@@ -240,9 +256,7 @@
                   trigger: 'hover click',
                   content: readableCurrency(wallet.balance)
                 }"
-              >
-                {{ readableCrypto(wallet.balance, false) }}
-              </span>
+              >{{ readableCrypto(wallet.balance, false) }}</span>
             </div>
           </div>
 
@@ -316,11 +330,25 @@ export default {
     },
 
     votedDelegate () {
-      return this.$store.getters['delegates/byPublicKey'](this.wallet.vote) || {}
+      return (
+        this.$store.getters['delegates/byPublicKey'](this.wallet.vote) || {}
+      )
     },
 
     isVoting () {
       return !!this.wallet.vote
+    },
+
+    totalStake () {
+      let totalStake = 0
+      if (this.wallet.stake !== undefined) {
+        for (const stakeKey of Object.keys(this.wallet.stake)) {
+          if (this.wallet.stake[stakeKey].halved === false) {
+            totalStake += +this.wallet.stake[stakeKey].amount
+          }
+        }
+      }
+      return totalStake
     }
   },
 
@@ -338,7 +366,7 @@ export default {
 
 <style scoped>
 .WalletHeaderDesktop {
-  @apply .bg-theme-feature-background .items-center .py-8
+  @apply .bg-theme-feature-background .items-center .py-8;
 }
 
 .address-button {

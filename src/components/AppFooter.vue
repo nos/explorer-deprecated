@@ -4,12 +4,7 @@
       <span class="block md:inline-block mb-4 md:mb-0 text-center">&copy; <a
         href="https://nos.io"
         target="_blank"
-      >nOS</a> | {{ year }}. {{ $t('FOOTER.ALL_RIGHTS_RESERVED') }}</span> <div class="block md:inline-block">
-        <span class="hidden md:inline-block"> | </span> <span>{{ $t('FOOTER.VERSION') }}: <a
-          :href="versionLink"
-          target="_blank"
-        >{{ version }}</a> | {{ $t('FOOTER.DATE') }}: {{ date }}</span>
-      </div>
+      >nOS</a> | {{ year }} {{ $t('FOOTER.ALL_RIGHTS_RESERVED') }}</span>
     </div>
     <div class="text-center">
       <a
