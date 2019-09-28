@@ -4,7 +4,8 @@
 
 [![License: MIT](https://badgen.now.sh/badge/license/MIT/green)](https://opensource.org/licenses/MIT)
 
-> Lead Maintainer: [Michel Kraaijeveld](https://github.com/ItsANameToo)
+> nOS Explorer Maintainer: [Dean van Dugteren](https://github.com/deanpress)
+> ARK Explorer Maintainer: [Michel Kraaijeveld](https://github.com/ItsANameToo)
 
 You can access it at [https://testnet-explorer.nos.io/](https://testnet-explorer.nos.io/).
 
