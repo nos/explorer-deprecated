@@ -1,6 +1,6 @@
 {
   "title": "nOS Testnet Explorer",
-  "server": "http://167.71.72.197:4003/api",
+  "server": "https://relay-1.nos.dev/api",
   "alias": "Development",
   "activeDelegates": 47,
   "rewardOffset": 14000,
