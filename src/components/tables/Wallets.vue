@@ -8,9 +8,7 @@
       :no-data-message="$t('COMMON.NO_RESULTS')"
       @on-sort-change="emitSortChange"
     >
-      <template
-        slot-scope="data"
-      >
+      <template slot-scope="data">
         <div v-if="data.column.field === 'originalIndex'">
           {{ getRank(data.row.originalIndex) }}
         </div>
@@ -23,9 +21,11 @@
         </div>
 
         <div v-else-if="data.column.field === 'balance'">
-          <span>
-            {{ readableCrypto(data.row.balance, true, truncateBalance ? 2 : 8) }}
-          </span>
+          <span>{{ readableCrypto(data.row.balance, true, truncateBalance ? 2 : 8) }}</span>
+        </div>
+
+        <div v-else-if="data.column.field === 'stakeWeight'">
+          <span>{{ readableCrypto((+data.row.balance * 0.1 + +data.row.stakeWeight), false, 0) }}</span>
         </div>
       </template>
     </TableWrapper>
@@ -83,8 +83,8 @@ export default {
           tdClass: 'whitespace-no-wrap'
         },
         {
-          label: this.$t('COMMON.SUPPLY'),
-          field: 'supply',
+          label: 'Vote Weight',
+          field: 'stakeWeight',
           type: 'number',
           sortable: false,
           thClass: 'end-cell w-24 not-sortable',
@@ -108,7 +108,8 @@ export default {
 
   methods: {
     getRank (value) {
-      const page = this.$route.params.page > 1 ? this.$route.params.page - 1 : 0
+      const page =
+        this.$route.params.page > 1 ? this.$route.params.page - 1 : 0
 
       return page * 25 + (value + 1)
     },
