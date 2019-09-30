@@ -26,13 +26,6 @@
           </div>
           <div>{{ readableCrypto(row.balance) }}</div>
         </div>
-
-        <div class="list-row">
-          <div class="mr-4">
-            {{ $t('COMMON.SUPPLY') }}
-          </div>
-          <div>{{ percentageString((row.balance / total) * 100) }}</div>
-        </div>
       </div>
       <div
         v-if="wallets && !wallets.length"

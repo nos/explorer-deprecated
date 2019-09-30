@@ -27,10 +27,6 @@
             {{ readableCrypto(data.row.balance, true, truncateBalance ? 2 : 8) }}
           </span>
         </div>
-
-        <div v-else-if="data.column.field === 'supply'">
-          {{ percentageString((data.row.balance / total) * 100) }}
-        </div>
       </template>
     </TableWrapper>
   </Loader>
